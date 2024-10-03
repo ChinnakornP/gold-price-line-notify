@@ -15,11 +15,10 @@ func main() {
 
 	err := godotenv.Load(".env")
 	if err != nil {
-		log.Fatalf("Error loading .env file")
 		if len(os.Args) == 1 {
 			lineNotifyToken = os.Args[0]
 		} else {
-			log.Fatalln("Please provide at least one argument.")
+			log.Fatalln("Please provide at least one argument. or .env file")
 			return
 		}
 	} else {
