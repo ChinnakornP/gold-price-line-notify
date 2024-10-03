@@ -11,12 +11,20 @@ import (
 )
 
 func main() {
+	lineNotifyToken := ""
+
 	err := godotenv.Load(".env")
 	if err != nil {
 		log.Fatalf("Error loading .env file")
+		if len(os.Args) == 1 {
+			lineNotifyToken = os.Args[0]
+		} else {
+			log.Fatalln("Please provide at least one argument.")
+			return
+		}
+	} else {
+		lineNotifyToken = os.Getenv("LINE_NOTIFY_TOKEN")
 	}
-
-	lineNotifyToken := os.Getenv("LINE_NOTIFY_TOKEN")
 
 	client := resty.New()
 
